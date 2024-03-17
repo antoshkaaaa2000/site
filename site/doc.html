@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <link rel="stylesheet" href="furer.css">
+    </head>
+  <body>
+    <header>
+      <div class = "logo">
+          <div class = "logoimage">
+              <img src="logo.png" width="85" height="75" alt="Логотип">
+          </div>
+          <div class = "log">
+              <nav id = "menu">
+                  <ul>
+                    <li> <a href = "manifest.html"> Манифест </a> </li>
+                    <li> <a href = "linux-main.html"> Главная </a> </li>
+                    <li> <a href = "doc.html"> Документация </a> </li>
+                    <li> <a href = "download.html"> Загрузки </a> </li>
+                  </ul>
+              </nav>
+          </div>
+      </div>
+  </header>
+  <main>
+      <h1> 1: Создание загрузочной флешки </h1>
+      <h2> 1.1: Загрузка iso образа Rubin </h2>
+      <h3> <a href = "download.html"> Перейдите на страницу "Загрузки" и скачайте iso образ, для вашей архитектуры.</a></h3>
+    <h2> 1.2: Создание загрузочной флешки, используя<a href= "https://etcher.balena.io/"> Balenta Etcher </a></h2>
+    <h3> Загрузите и установите Balenta Etcher.
+        Выберите iso файл Rubin, и диск, который вы хотите использовать, как установочную флешку. Начните запись iso файла.
+        Узнайте модель своего wifi адаптера и производителя своей материнской платы. Эта информация потребуется вам, для дальнейшей установки системы.
+         </h3>
+         <h2> 1.3: Создание загрузочной флешки, используя<a href= "https://www.ventoy.net/en/download.html"></a> Ventoy </h2>
+         <h3> Загрузите и установите <a href="https://www.ventoy.net/en/download.html"> Ventoy. </a> Откройте программу, выберите диск, который вы хотите использовать как загрузочную флешку и установите на него Ventoy. Затем переместите iso образ Rubin на диск Ventoy.</h3>
+         <h2> 1.4: Создание загрузочной флешки вручную</h2>
+         <h3> Сформатируйте свою флешку в формат FAT32. Для этого можно использывать стороние программы. Например,<a href="https://www.disk-image.com/index.html"> Active@ Disk Image.</a> Затем с помощью программы-архиватора (Например <a href="https://www.win-rar.com/start.html?&L=4"> WinRar.</a>) распакуйте iso образ на флешку.</h3>
+        </main>
+        <h1> 2: Установка </h1>
+      <h2> 2.1: Загрузка в систему </h2>
+      <h3><a href= "https://i2hard.ru/question/27914/"> Перезагрузитесь в bios.</a> (Управление в bios и boot меню осуществляется стрелками, для выбора системы нажмите Enter.) Выберите вашу загрузочную флешку в boot меню. Дождитесь загрузки системы и начните установку, выбрав пункт "Try or install Rubin". Затем перед вами откроется графический установщик.</h3>
+      <h2> 2.2: Начало графической установки </h2>
+      <h3> В меню слева, выберите русский язык, и начните установку. По желанию, (Если на данном этапе у вас работает интернет) установите обновления и драйвера. Следуйте дальнейшим этапам графического установщика, завершите установку системы и перезагрузите компьютер. Затем переходите к шагу №3.</h3>
+      <h1> 3: Установка драйверов Nvidia </h1>
+      <h2> 3.1: Установка драйверов на видеокарту, используя ubuntu-drivers </h2>
+      <h3> Откройте терминал одновременным нажатием клавиш control+alt+t, и введите команду "sudo ubuntu-drivers autoinstall", а затем введите пароль (Пароль может не отображаться, это нормально.) Эта команда установит последние драйвера из официального репозитория Ubuntu. Перезагрузите компьютер.</h3>
+      <h2> 3.2: Установка драйверов на видеокарту, используя nvidia-detect</h2>
+      <h3> Установите nvidia detect командой "sudo apt install nvidia-detect". Введите команду nvidia-detect. На экране высветиться название нужного драйвера. Установите драйвер командой "sudo apt install название драйвера". Перезагрузите компьютер.</h3>
+      <h2> 3.3: Установка драйверов с официального сайта Nvidia </h2>
+      <h3><a href="https://www.nvidia.com/en-us/drivers/unix/">Перейдите на сайт Nvidia и загрузите нужную версию драйвера.</a> Переместите драйвер в папку /home/имя вашего пользователя. Впишите в терминал команды:
+      "sudo su", "nano /etc/modprobe.d/blacklist-nouveau.conf" в открывшимся файле, впишите следующий текст: </h3>
+      <h3>blacklist nouveau
+options nouveau modeset=0</h3>
+<h3>Сохраните текст, нажав control+x, затем впишите "y" и два раза нажмите enter.
+Выполните команду "update-initramfs -u", "systemctl set-default multi-user.target", "systemctl reboot".
+Перед вами откроется черная командная строка, впишите имя вашего пользователя и нажмите enter. Затем ваш пароль и нажмите enter.
+Введите команду "sudo su", Чтобы посмотреть имя драйвера, воспользуйтесь командой "ls", для отображения имён всех файлов в папке, затем команду "bash имя вашего драйвера".
+Во время установки выберите следующие опции:</h3>
+<h3><ul><li><em>The CC version check failed</em>: <strong>Ignore CC version check</strong></li><li><em>Install NVIDIA's 32-bit compatibility libraries</em>: <strong>Yes</strong></li><li><em>An incomplete installation of libglvnd was found. Do you want to install a full copy of libglvnd? This will overwrite any existing libglvnd libraries</em>: <strong>Install and overwrite existing filesort installation</strong></li><li><em>Would you like to run the nvidia-xconfig utility to automatically update your X configuration file so that the NVIDIA X driver will be used when you restart X?&nbsp; Any pre-existing X configuration file will be backed up</em>: <strong>Yes</strong></li></ul></h3>
+<h3>Введите команду "systemctl set-default graphical.target", а затем "systemctl reboot".</h3>
+        <h1> 4: Удаление лишних систем из boot меню </h1> 
+        <h3> Если после установки в вашем boot меню остались несуществующие системы, вы можете удалить их с помощью утилиты efibootmgr. Выполните команду "efibootmgr", для отображения списка систем. Перед вами высветиться список входов из вашего boot menu. </h3>
+        <h3> Чтобы удалить ненужные входы, введите команду "sudo efibootmgr -Bb номер boot order, который высвечивается у нужного входа в систему". Можете удалить все входы КРОМЕ UBUNTU.</h3>
+        <h1> 5: Добавление и настройки русской раскладки </h1>
+        <h3> Откройте настройки клавиатуры (Система -> Параметры -> Оборудование -> Клавиатура), перейдите во вкладку "Раскладки", добавьте русскую раскладку, перейдите в параметры и выберите любую удобную вам горячую клавишу для смены раскладки клавиатуры.</h3>
