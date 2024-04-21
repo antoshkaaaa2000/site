@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <script src ="forum.js"></script>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+        <input type="text" name="username" id="username-filed" placeholder="Введите логин">
+        <input type="password" name="password" id="password-filed" placeholder="Введите пароль">
+        <button onclick="login_vhod()">Вход</button>
+    </main>
+    <script>
+      login = document.getElementById('username-filed');
+      password = document.getElementById('password-filed');
+      console.log(login);
+      console.log(password);
+      button = document.getElementById('login-form-submit');
+      login_value = login.value;
+        password_value = password.value;
+        console.log(login_value);
+        console.log(password_value);
+      function login_vhod() {
+        login_value = login.value;
+        password_value = password.value;
+        console.log(login_value)
+        console.log(password_value)
+      }
+    </script>
+    <footer></footer>
+  </body>
+</html>
